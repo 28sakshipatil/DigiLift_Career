@@ -48,7 +48,4 @@
 - cd Digilift_Career/frontend/html/prediction (in other terminal)
 - python app.py
 
--cd Digilift_Career/frontend/hyml/prediction
--python app.py
-
-open about_us.html file in web 
+#### open about_us.html file in web 
