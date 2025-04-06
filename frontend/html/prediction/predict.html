@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Predict Your Stream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; */
+            margin: 20;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            margin:10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #555;
+            transform: translateY(-3px);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .input-group {
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input:read-only {
+            background-color: #e9ecef;
+            color: #495057;
+            font-weight: bold;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        #result2 {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000000;
+        }
+        #careerLink {
+            display: none;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        #careerLink a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #careerLink a:hover {
+            text-decoration: underline;
+        }
+        #userInput {
+            width: 300px;
+            height: 150px;
+            resize: none;  /* Prevent manual resizing */
+            font-size: 16px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        /* strong {
+            color:Red;
+        } */
+        #result2 p b {
+        font-weight: bold;
+    }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <div>
+      
+        <div class="container">
+            <div class="container1">
+                <a href="./../dashboard/dashboardstu.html" class="back-btn">← Back to Dashboard</a>
+            </div>
+            <h1>Enter Your Marks</h1>
+            <form id="predictForm">
+                <div class="input-group">
+                    <label>English Marks:</label>
+                    <input type="number" id="englishMarks" placeholder="Enter English Marks" min="0" max="100">
+                </div>
+
+                <div class="input-group">
+                    <label>Math Marks:</label>
+                    <input type="number" id="mathMarks" placeholder="Enter Math Marks" min="0" max="100">
+                </div>
+
+                <div class="input-group">
+                    <label>Science Marks:</label>
+                    <input type="number" id="scienceMarks" placeholder="Enter Science Marks" min="0" max="100">
+                </div>
+                <button type="button" onclick="autofillMarks()">Auto-Fill Marks from DigiLocker</button>
+                <button id="goToDigiLocker" style="display: none; background: #dc3545; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; font-size: 18px; cursor: pointer; margin-top: 10px;">
+                    Go to DigiLocker
+                </button>
+             
+                <h2>Test Scores (Read-Only)</h2>
+                <div class="input-group">
+                    <label>Ability to Think:</label>
+                    <input type="number" id="abilityToThink" readonly>
+                </div>
+
+                <div class="input-group">
+                    <label>Logical Reasoning:</label>
+                    <input type="number" id="logicalReasoning" readonly>
+                </div>
+
+                <button type="submit">Predict Stream</button>
+            </form>
+            <p id="result"></p>
+            <p id="careerLink"></p>
+
+            <br>
+            <div class=""input-group>
+                <textarea id="userInput" placeholder="Describe your interests, goals, or thoughts..." required></textarea>
+            </div>
+          
+           
+            <button onclick="analyzeText()">Analyze</button>
+            <div id="result2">
+                <h2>📊 Analysis Results</h2>
+                <p><b>Detected Emotion:</b> <span id="emotion">dfadfd</span></p>
+                <p><b>Suggested Career:</b> <span id="career"></span></p>
+                <p><b>Recommended Stream:</b> <span id="stream"></span></p>
+                <p><b>Detected Personality:</b> <span id="personality"></span></p>
+                <p><b>Cognitive Bias Detected:</b> <span id="bias"></span></p>
+                <p><b>Subject Detected:</b> <span id="subject"></span></p>
+            
+                <canvas id="personalityChart" width="400" height="200"></canvas>
+            </div>
+            <button onclick="downloadPrediction()">Download Report</button>
+            
+            
+        </div>
+    </div>
+
+    <script>
+
+function autofillMarks() {
+        const savedMarks = JSON.parse(localStorage.getItem("marks")) || {};
+
+        if (!savedMarks.English || !savedMarks.Maths || !savedMarks.Science) {
+            alert("⚠️ No extracted marks found! Please login to DigiLocker and analyze your marks.");
+        } else {
+            document.getElementById("englishMarks").value = savedMarks.English;
+            document.getElementById("mathMarks").value = savedMarks.Maths;
+            document.getElementById("scienceMarks").value = savedMarks.Science;
+            console.log("📊 Auto-filled Marks from Local Storage:", savedMarks);
+        }
+    }
+
+        document.getElementById("abilityToThink").value = localStorage.getItem("ability_to_think_score") || 0;
+        document.getElementById("logicalReasoning").value = localStorage.getItem("logical_reasoning_score") || 0;
+
+        console.log("Retrieved Ability_to_Think:", localStorage.getItem("ability_to_think_score"));
+        console.log("Retrieved Logical_Reasoning:", localStorage.getItem("logical_reasoning_score"));
+
+        document.getElementById("predictForm").onsubmit = async function(event) {
+            event.preventDefault();
+
+            const data = {
+                English_Marks: parseFloat(document.getElementById("englishMarks").value),
+                Math_Marks: parseFloat(document.getElementById("mathMarks").value),
+                Science_Marks: parseFloat(document.getElementById("scienceMarks").value),
+                Ability_to_Think: parseInt(localStorage.getItem("ability_to_think_score")) || 0,
+                Logical_Reasoning: parseInt(localStorage.getItem("logical_reasoning_score")) || 0
+            };
+
+            console.log("Sending Data:", data);
+
+            try {
+                const response = await fetch("http://127.0.0.1:5000/predict", { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log("Server Response:", result);
+
+                const recommendedStream = result.Recommended_Stream;
+                document.getElementById("result").innerText = `Recommended Stream: ${recommendedStream}`;
+
+                const streamPages = {
+                    "Sci-Maths": "./../dashboard/science.html",
+                    "Sci-Bio": "./../dashboard/science.html",
+                    "Commerce": "./../dashboard/commerce.html",
+                    "Arts": "./../dashboard/arts.html"
+                };
+
+                const careerLinkElement = document.getElementById("careerLink");
+
+                if (streamPages[recommendedStream]) {
+                    careerLinkElement.innerHTML = `Explore career options for  ${recommendedStream}: <a href="${streamPages[recommendedStream]}" >Click here</a>`;
+                    careerLinkElement.style.display = "block";
+                } else {
+                    careerLinkElement.style.display = "none";
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById("result").innerText = "Error predicting stream!";
+            }
+        };
+    </script>
+   <script>
+    function checkLocalStorage() {
+        const savedMarks = JSON.parse(localStorage.getItem("marks")) || {};
+
+        if (!savedMarks.English || !savedMarks.Maths || !savedMarks.Science) {
+            document.getElementById("goToDigiLocker").style.display = "block";
+        }
+    }
+
+    document.getElementById("goToDigiLocker").addEventListener("click", function() {
+        window.location.href = "./../basicDigi-1/basicindex.html";
+    });
+
+    checkLocalStorage();
+</script>
+<script>
+    let wordsData;
+
+    // Load predefined words from JSON
+    fetch("words.json")
+        .then(response => response.json())
+        .then(data => wordsData = data)
+        .catch(error => console.error("Error loading words:", error));
+
+    function analyzeText() {
+        let inputText = document.getElementById("userInput").value.toLowerCase();
+        
+        let detectedSubject = detectSubject(inputText);
+        let detectedEmotion = detectEmotion(inputText);
+        let personality = detectPersonality(inputText);
+        let bias = detectBias(inputText);
+
+        let careerInfo;
+
+        // Priority: If a subject is detected, use its stream
+        if (detectedSubject) {
+            careerInfo = wordsData.subjects[detectedSubject] || { career: "General Studies", stream: "Any Stream" };
+        } else {
+            careerInfo = wordsData.careers[detectedEmotion] || { career: "General Studies", stream: "Any Stream" };
+        }
+
+        // Display results
+        document.getElementById("subject").textContent = detectedSubject || "None";
+        document.getElementById("emotion").textContent = detectedEmotion || "Neutral";
+        document.getElementById("career").textContent = careerInfo.career;
+        document.getElementById("stream").textContent = careerInfo.stream;
+        document.getElementById("personality").textContent = personality || "Unknown";
+        // document.getElementById("bias").textContent = bias || "None detected";
+        let biasElement = document.getElementById("bias");
+    if (bias) {
+        biasElement.style.display = "block";  // Show if bias is detected
+        document.getElementById("bias").textContent = bias;
+    } else {
+        biasElement.style.display = "";  // Hide if no bias detected
+    }
+
+        // Generate personality chart
+        generateChart(personality);
+    }
+
+    // Detect Subjects (New Function)
+    function detectSubject(text) {
+        for (let subject of Object.keys(wordsData.subjects)) {
+            if (text.includes(subject)) return subject;
+        }
+        return null;
+    }
+
+    // Detect Emotion
+    function detectEmotion(text) {
+        for (let [emotion, words] of Object.entries(wordsData.emotions)) {
+            if (words.some(word => text.includes(word))) return emotion;
+        }
+        return "Neutral";
+    }
+
+    // Detect Personality
+    function detectPersonality(text) {
+        for (let [trait, words] of Object.entries(wordsData.personality_traits)) {
+            if (words.some(word => text.includes(word))) return trait.charAt(0).toUpperCase() + trait.slice(1);
+        }
+        return "Unknown";
+    }
+
+    // Detect Bias
+    function detectBias(text) {
+        for (let bias of wordsData.biases) {
+            if (text.includes(bias.phrase)) return bias.message;
+        }
+        return "";
+    }
+
+    // Generate Personality Chart
+    function generateChart(personality) {
+        let ctx = document.getElementById("personalityChart").getContext("2d");
+
+        let data = {
+            labels: ["Analyst", "Feeler", "Performer"],
+            datasets: [{
+                label: "Personality Strength",
+                data: [
+                    personality === "Analyst" ? 90 : 30,
+                    personality === "Feeler" ? 90 : 30,
+                    personality === "Performer" ? 90 : 30
+                ],
+                backgroundColor: ["#007BFF", "#FF6384", "#FFCE56"]
+            }]
+        };
+
+        if (window.myChart) {
+            window.myChart.destroy();
+        }
+
+        window.myChart = new Chart(ctx, {
+            type: "bar",
+            data: data
+        });
+    }
+</script>
+<script s<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+<script>
+function downloadPrediction() {
+    const { jsPDF } = window.jspdf;
+    let doc = new jsPDF();
+
+    let studentName = localStorage.getItem("studentName") || "N/A";
+    let studentEmail = localStorage.getItem("studentEmail") || "N/A";
+    let englishMarks = document.getElementById("englishMarks").value;
+    let mathMarks = document.getElementById("mathMarks").value;
+    let scienceMarks = document.getElementById("scienceMarks").value;
+    let abilityToThink = document.getElementById("abilityToThink").value;
+    let logicalReasoning = document.getElementById("logicalReasoning").value;
+    let recommendedStream = document.getElementById("result").innerText;
+    let detectedEmotion = document.getElementById("emotion").textContent;
+    let suggestedCareer = document.getElementById("career").textContent;
+    let detectedPersonality = document.getElementById("personality").textContent;
+    let detectedBias = document.getElementById("bias").textContent;
+    let detectedSubject = document.getElementById("subject").textContent;
+    let reportDate = new Date().toLocaleDateString();
+
+    let y = 20; // Initial Y position
+
+    function addLine() {
+        doc.setDrawColor(0);
+        doc.setLineWidth(0.5);
+        doc.line(14, y, 195, y);
+        y += 5;
+    }
+
+    function addSection(title) {
+        addLine();
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.text(title, 14, y);
+        y += 7;
+    }
+
+    function addBoldText(label, value) {
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        doc.text(label, 14, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(value, 70, y);
+        y += 6;
+    }
+
+    // 📝 Title
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("STUDENT STREAM PREDICTION REPORT", 14, y);
+    y += 8;
+
+    // 📅 Date
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(9);
+    doc.text(`Date of Report: ${reportDate}`, 140, y);
+    y += 10;
+
+    // 👤 Student Information
+    addSection("STUDENT INFORMATION");
+    addBoldText("Name:", studentName);
+    addBoldText("Email:", studentEmail);
+
+    // 📚 Academic Performance
+    addSection("ACADEMIC PERFORMANCE");
+    addBoldText("English Marks:", englishMarks);
+    addBoldText("Math Marks:", mathMarks);
+    addBoldText("Science Marks:", scienceMarks);
+
+    // 🧠 Logical Reasoning
+    addSection("LOGICAL REASONING TEST RESULTS");
+    addBoldText("Ability to Think:", abilityToThink);
+    addBoldText("Logical Reasoning Score:", logicalReasoning);
+
+    // 🎯 Prediction Results
+    addSection("PREDICTION RESULTS");
+    addBoldText("Recommended Stream:", recommendedStream);
+
+    // 🔍 Additional Insights
+    addSection("ADDITIONAL INSIGHTS");
+    addBoldText("Detected Emotion:", detectedEmotion);
+    addBoldText("Suggested Career:", suggestedCareer);
+    addBoldText("Detected Personality:", detectedPersonality);
+    addBoldText("Cognitive Bias Detected:", detectedBias);
+    addBoldText("Subject Detected:", detectedSubject);
+
+    // 📢 Footer
+    addSection("REPORT SUMMARY");
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.text("This analysis was generated using AI-based career", 14, y);
+    y += 5;
+    doc.text("assessment models. The recommended stream and", 14, y);
+    y += 5;
+    doc.text("career path are based on the provided academic", 14, y);
+    y += 5;
+    doc.text("scores and logical reasoning test performance.", 14, y);
+    y += 10;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.text("ANALYSIS GENERATED BY DIGILIFT CAREER AI", 14, y);
+    addLine();
+    y += 7;
+
+    // 📊 Add Chart if Exists
+    let canvas = document.getElementById("personalityChart");
+    if (canvas) {
+        html2canvas(canvas).then((chartCanvas) => {
+            let imgData = chartCanvas.toDataURL("image/png");
+            doc.addImage(imgData, "PNG", 60, y, 90, 60);
+            doc.save(`Prediction_Report_${studentName}.pdf`);
+        });
+    } else {
+        doc.save(`Prediction_Report_${studentName}.pdf`);
+    }
+}
+
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

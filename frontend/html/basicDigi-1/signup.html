@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DigiLocker - Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        async function signup() {
+            const aadhaar = document.getElementById("aadhaar").value;
+            const phone = document.getElementById("phone").value;
+            const password = document.getElementById("password").value;
+
+            const response = await fetch("http://localhost:4000/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ aadhaar, phone, password, role: "citizen" })
+            });
+
+            const data = await response.json();
+            alert(data.message);
+            if (response.ok) window.location.href = "basicindex.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up (For Citizen only)</h2>
+        <input type="text" id="aadhaar" placeholder="Aadhaar Number"><br>
+        <input type="text" id="phone" placeholder="Phone Number"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button onclick="signup()">Sign Up</button>
+        <p>Already user? <a href="basicindex.html">Login In </a></p>
+    </div>
+</body>
+</html>

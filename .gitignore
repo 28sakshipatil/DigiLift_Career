@@ -1,0 +1,10 @@
+*/node_modules
+
+   <div class="dashboard">
+      <div class="logo">DigiLift Careers</div>
+      <div class="auth-links">
+        <!-- <a href="login/loginCV.html">Login</a> -->
+        <a href="roleselection.html">Login</a>
+        <a href="mailto:info@digiliftcareers.com">Contact</a>
+      </div>
+    </div>

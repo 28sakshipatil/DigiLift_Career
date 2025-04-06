@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 40px 0;
+            text-transform: uppercase;
+        }
+        .section-title span {
+            color: #007bff;
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* How Does It Work Section */
+        .work-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .card {
+            background: #ffffff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.185);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            width: 300px;
+            transition: transform 0.3s ease-in-out;
+            border-bottom: 4px solid #646464;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .icon {
+            font-size: 40px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Services Section */
+        .services-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .services-box img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+        }
+        .services-content {
+            flex: 1;
+            padding-left: 20px;
+            text-align: left;
+        }
+        .services-content h3 {
+            color: #007bff;
+        }
+        .toggle-box {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            border: 1px solid #007bff;
+        }
+        .toggle-box:hover {
+            background: #e9ecef;
+        }
+        .toggle-content {
+            display: none;
+            padding: 10px;
+            font-size: 14px;
+            color: #555;
+            border-left: 3px solid #007bff;
+            margin-top: 5px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #37373743;
+            color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        .testimonial-card {
+            background: white;
+            color: black;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px auto;
+            max-width: 600px;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .testimonial-card p {
+            font-size: 14px;
+        }
+        .testimonial-name {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- How Does It Work Section -->
+    <h2 class="section-title"><span>How</span> Does It Work?</h2>
+    <div class="container">
+        <div class="work-container">
+            <div class="card">
+                <div class="icon">📝</div>
+                <h3>Assessment</h3>
+                <p>Start with an AI-driven career assessment test to evaluate your skills, interests, and personality. This test will help identify the best career paths tailored for you.</p>
+            </div>
+            <div class="card">
+                <div class="icon">👥</div>
+                <h3>Counselling Session</h3>
+                <p>In a 90-minute online session, we review your career report, explore your natural skills and interests, and provide the top 3 career options best suited to your personality.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📄</div>
+                <h3>Post-Counselling</h3>
+                <p>You’ll receive a detailed list of degree options along with professional certifications, followed by 6 months of support for further guidance.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <h2 class="section-title"><span>Services</span> Offered</h2>
+    <div class="container">
+        <div class="services-box">
+            <img src="https://www.aadicareercentre.com/wp-content/uploads/2024/04/9611347-1024x1024.jpg" alt="Career Guidance">
+            <div class="services-content">
+                <h3>Career Guidance for Class 9 & 10</h3>
+                <p>Confused about which stream to choose after 10th? Get expert guidance to find the right career path based on your natural interests and skills. Discover the best stream and subjects for you.</p>
+                
+                <div class="toggle-box" onclick="toggleContent('criteria')">
+                    Eligibility Criteria <span>+</span>
+                </div>
+                <div class="toggle-content" id="criteria">Students of Class 9 and 10 looking for career guidance and subject selection.</div>
+
+                <div class="toggle-box" onclick="toggleContent('attend')">
+                    Who Should Attend? <span>+</span>
+                </div>
+                <div class="toggle-content" id="attend">Students, parents, and educators seeking clarity on career paths.</div>
+
+                <div class="toggle-box" onclick="toggleContent('format')">
+                    Session Format <span>+</span>
+                </div>
+                <div class="toggle-content" id="format">Online one-on-one counseling sessions with career experts.</div>
+
+                <div class="toggle-box" onclick="toggleContent('outcome')">
+                    Session Outcome <span>+</span>
+                </div>
+                <div class="toggle-content" id="outcome">Personalized career recommendations with a roadmap for future studies.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <h2 class="section-title"><span>What</span> Students Say</h2>
+    <div class="container">
+        <div class="testimonials">
+            <div class="testimonial-card">
+                <p>"This session helped me understand my strengths and choose the right stream. The expert guidance was amazing!"</p>
+                <div class="testimonial-name">- Anjali Sharma</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"I was confused about my career path, but this program provided me with clarity and confidence in my decision."</p>
+                <div class="testimonial-name">- Rahul Verma</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        }
+    </script>
+
+</body>
+</html>

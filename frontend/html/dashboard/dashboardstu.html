@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard | DigiLift Careers</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      :root {
+        --dark-blue: #272643; /* Dark blue for "Careers" */
+        --deep-blue: #2c698d; /* Deep blue for "DigiLift" */
+        --white: #ffffff;
+        --light-teal: #e3f6f5;
+        --medium-teal: #bae8e8;
+      }
+     
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+
+      body {
+        background-color: var(--white);
+        color: var(--dark-blue);
+      }
+
+
+      /* Top Navigation Bar */
+      .navbar {
+        background-color: var(--light-teal);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+
+      .navbar h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+
+      .navbar h2 span:first-child {
+        color: var(--deep-blue); /* DigiLift in deep blue */
+      }
+
+
+      .navbar h2 span:last-child {
+        color: var(--dark-blue); /* Careers in dark blue */
+      }
+
+
+      .navbar ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+
+      .navbar ul li a {
+        text-decoration: none;
+        color: var(--dark-blue);
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+      }
+
+
+      .navbar ul li a:hover {
+        background-color: var(--medium-teal);
+      }
+
+
+      .navbar ul li a i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+      }
+
+
+      .navbar .signout-btn {
+        background-color: var(--dark-blue);
+        color: var(--white);
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+
+      .navbar .signout-btn:hover {
+        background-color: var(--deep-blue);
+        transform: translateY(-3px);
+      }
+
+
+      /* Main Content */
+      .main-content {
+        padding: 100px 40px 40px;
+        background-color: var(--white);
+      }
+
+
+      .main-content h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--dark-blue);
+        margin-bottom: 20px;
+      }
+
+
+      /* Cards */
+      .card {
+        background-color: var(--white);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: left;
+        border: 1px solid var(--medium-teal);
+      }
+
+
+      .card h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--dark-blue);
+        margin-bottom: 15px;
+      }
+
+
+      .card p {
+        font-size: 1rem;
+        color: var(--dark-blue);
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+
+      .card .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: var(--dark-blue);
+        color: var(--white);
+        border: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-decoration: none;
+        text-align: center;
+      }
+
+
+      .card .btn:hover {
+        background-color: var(--deep-blue);
+        transform: translateY(-3px);
+      }
+
+
+      /* Career Guidance Resources Grid */
+      .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+     
+      .resource-card {
+        background-color: var(--white);
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--medium-teal);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+     
+      .resource-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      }
+     
+      .resource-icon {
+        width: 60px;
+        height: 60px;
+        background-color: var(--light-teal);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+     
+      .resource-icon i {
+        font-size: 1.8rem;
+        color: var(--dark-blue);
+      }
+     
+      .resource-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: var(--dark-blue);
+      }
+     
+      .resource-card p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+        color: var(--dark-blue);
+      }
+     
+      .resource-card .btn {
+        width: 100%;
+        max-width: 200px;
+        margin-top: auto;
+      }
+
+
+      /* Courses Section */
+      .courses-list {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+     
+      .course-item {
+        background-color: var(--medium-teal);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+     
+      .course-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      }
+     
+      .course-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+     
+      .course-item h4 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--dark-blue);
+        margin-bottom: 10px;
+      }
+     
+      .course-item p {
+        font-size: 1rem;
+        color: var(--dark-blue);
+        margin-bottom: 15px;
+      }
+     
+      .course-item ul {
+        margin-bottom: 15px;
+        padding-left: 20px;
+        text-align: left;
+        width: 100%;
+      }
+     
+      .course-item ul li {
+        font-size: 0.9rem;
+        color: var(--dark-blue);
+        margin-bottom: 5px;
+      }
+     
+      .course-link {
+        text-decoration: none;
+        color: inherit;
+        flex: 1 1 calc(33.33% - 40px);
+        max-width: calc(33.33% - 40px);
+      }
+
+
+      /* Counselor item styling */
+      .counselor-item {
+        background-color: var(--medium-teal);
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+      }
+     
+      .counselor-item h4 {
+        color: var(--dark-blue);
+      }
+     
+      .counselor-item p,
+      .counselor-item ul {
+        color: var(--dark-blue);
+      }
+     
+      /* Form elements */
+      form {
+        background-color: var(--medium-teal);
+        padding: 20px;
+        border-radius: 12px;
+      }
+     
+      textarea, select {
+        background-color: var(--light-teal);
+        border: 1px solid var(--medium-teal);
+        color: var(--dark-blue);
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--white);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        width: 400px;
+        border: 1px solid var(--medium-teal);
+      }
+
+
+      .modal h4 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--dark-blue);
+      }
+
+
+      .modal label {
+        display: block;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: var(--dark-blue);
+      }
+
+
+      .modal select,
+      .modal textarea,
+      .modal input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--medium-teal);
+        border-radius: 8px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        background-color: var(--light-teal);
+      }
+
+
+      .modal textarea {
+        resize: vertical;
+      }
+
+
+      /* Overlay for Modal */
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+
+      /* Confirmation Message */
+      #confirmation {
+        margin-top: 15px;
+        font-size: 0.9em;
+        color: var(--deep-blue);
+      }
+
+
+      /* Counseling Container Styles */
+      .counseling-container {
+        background-color: var(--white);
+        color: var(--dark-blue);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        margin: 20px auto;
+        max-width: 600px;
+        text-align: center;
+        border: 1px solid var(--medium-teal);
+      }
+
+
+      .counselor-title, .requests-title {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        color: var(--dark-blue);
+        margin-bottom: 10px;
+      }
+
+
+      .counselor-title {
+        font-size: 2rem;
+        border-bottom: 3px solid var(--dark-blue);
+        display: inline-block;
+        padding-bottom: 5px;
+      }
+
+
+      .requests-title {
+        font-size: 1.5rem;
+        margin-top: 20px;
+        color: var(--deep-blue);
+      }
+
+
+      .counselor-list, .requests-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+      }
+
+
+      .counselor-list li, .requests-list li {
+        background: var(--medium-teal);
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+
+      .counselor-list li:hover, .requests-list li:hover {
+        background: var(--light-teal);
+        transform: translateY(-3px);
+      }
+
+
+      .request-btn {
+        background-color: var(--dark-blue);
+        color: white;
+        padding: 10px 15px;
+        border: 2px solid var(--medium-teal);
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease-in-out;
+        margin-left: 15px;
+        width:auto;
+      }
+
+
+      .request-btn:hover {
+        background-color: var(--white);
+        color: var(--dark-blue);
+        border-color: var(--dark-blue);
+      }
+
+
+      /* Chatbot Button and Status */
+      .chatbot-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: var(--deep-blue);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 999;
+        transition: all 0.3s ease;
+      }
+
+
+      .chatbot-btn:hover {
+        background-color: var(--dark-blue);
+        transform: scale(1.1);
+      }
+
+
+      .chatbot-status {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 14px;
+        display: none;
+        z-index: 1000;
+        max-width: 300px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .course-item,
+        .resource-card {
+          flex: 1 1 calc(50% - 20px);
+          max-width: calc(50% - 20px);
+        }
+       
+        .navbar ul {
+          gap: 10px;
+        }
+       
+        .main-content {
+          padding: 100px 20px 20px;
+        }
+
+
+        .chatbot-status {
+          right: 20px;
+          bottom: 90px;
+          max-width: 250px;
+        }
+      }
+
+
+      @media (max-width: 480px) {
+        .course-item,
+        .resource-card {
+          flex: 1 1 100%;
+          max-width: 100%;
+        }
+       
+        .navbar {
+          flex-direction: column;
+          padding: 10px;
+        }
+       
+        .navbar ul {
+          margin-top: 10px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+       
+        .modal {
+          width: 90%;
+        }
+
+
+        .chatbot-btn {
+          bottom: 20px;
+          right: 20px;
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+        }
+
+
+        .chatbot-status {
+          right: 15px;
+          bottom: 80px;
+          max-width: 200px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <div class="navbar">
+      <h2><span>DigiLift</span> <span>Careers</span></h2>
+      <ul>
+        <li>
+          <a href="#aptitude-tests" onclick="showContent('aptitude-tests')">
+            <i class="bx bx-file"></i> Aptitude Tests
+          </a>
+        </li>
+        <li>
+          <a href="#sessions" onclick="showContent('sessions')">
+            <i class="bx bx-history"></i> Counseling Sessions
+          </a>
+        </li>
+        <li>
+          <a href="#courses" onclick="showContent('courses')">
+            <i class="bx bx-book"></i> Courses
+          </a>
+        </li>
+        <li>
+          <a href="./../basicDigi-1/basicindex.html" onclick="showContent('courses')">
+            <i class="bx bx-lock"></i> Connect <br>Digilocker
+          </a>
+        </li>
+        <li>
+          <a href="#feedback" onclick="showContent('feedback')">
+            <i class="bx bx-cog"></i> Feedback
+          </a>
+        </li>
+      </ul>
+      <button class="signout-btn" onclick="signOut()">Sign Out</button>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Aptitude Tests Section -->
+      <div id="aptitude-tests" class="card">
+        <h3>Aptitude Tests</h3>
+        <p>
+          Take our aptitude test to discover which career path suits you best.
+          The test evaluates your strengths, interests, and skills to provide
+          personalized recommendations.
+        </p>
+        <div class="resources-grid">
+          <!-- Aptitude Test Card -->
+          <div class="resource-card">
+            <div class="resource-icon">
+              <i class="bx bx-clipboard"></i>
+            </div>
+            <h4>Aptitude Test</h4>
+            <p>
+              Discover which career path suits you best with our comprehensive aptitude test.
+            </p>
+            <a href="./../prediction/index.html" class="btn">Take Test</a>
+          </div>
+         
+          <!-- Government Jobs Card -->
+          <div class="resource-card">
+            <div class="resource-icon">
+              <i class="bx bx-briefcase-alt"></i>
+            </div>
+            <h4>Government Jobs</h4>
+            <p>
+              Explore current government job opportunities through Mission Rozgar portal.
+            </p>
+            <a href="../mission-rozgar.html" class="btn">View Jobs</a>
+          </div>
+         
+          <!-- Scholarships Card -->
+          <div class="resource-card">
+            <div class="resource-icon">
+              <i class="bx bx-award"></i>
+            </div>
+            <h4>Scholarships</h4>
+            <p>
+              Find government scholarships to support your education and career goals.
+            </p>
+            <a href="../scholarship.html" class="btn">Explore Scholarships</a>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Counseling Sessions Section -->
+      <div id="sessions" class="counseling-container">
+        <h1 class="counselor-title">Counselor</h1>
+        <ul id="counselorList" class="counselor-list"></ul>
+
+
+        <h2 class="requests-title">My Requests</h2>
+        <ul id="studentRequests" class="requests-list"></ul>
+      </div>
+
+
+      <!-- Courses Section -->
+      <div id="courses" class="card">
+        <h3>Courses after 10</h3>
+        <div class="courses-list">
+          <!-- Science Stream -->
+          <a href="science.html" class="course-link">
+            <div class="course-item">
+              <img src="../images/science.jpg" alt="Science" />
+              <h4>Science Stream</h4>
+              <p>
+                The Science Stream explores the wonders of the natural world
+                through subjects like Physics, Chemistry, Biology, and
+                Mathematics, fostering analytical and problem-solving skills.
+              </p>
+              <h5>Subjects You'll Encounter:</h5>
+              <ul>
+                <li>Physics ⚡</li>
+                <li>Chemistry 🧪</li>
+                <li>Biology 🧬</li>
+                <li>Mathematics 📐</li>
+                <li>English 📚</li>
+                <li>Hindi / French (Optional) 📝</li>
+                <li>Computer Science (Optional) 💻</li>
+                <li>Environmental Science (Optional) 🌱</li>
+                <li>Biotechnology (Optional) 🧫</li>
+                <li>Physical Education (Optional) 🏅</li>
+                <li>Psychology (Optional) 🧠</li>
+              </ul>
+            </div>
+          </a>
+
+
+          <!-- Commerce Stream -->
+          <a href="commerce.html" class="course-link">
+            <div class="course-item">
+              <img src="../images/commerce.jpg" alt="Commerce" />
+              <h4>Commerce Stream</h4>
+              <p>
+                The Commerce Stream focuses on business, finance, and economics,
+                preparing students for careers in management, accounting, and
+                entrepreneurship.
+              </p>
+              <h5>Subjects You'll Encounter:</h5>
+              <ul>
+                <li>Accountancy 📊</li>
+                <li>Economics 📈</li>
+                <li>Business Studies 🏢</li>
+                <li>Mathematics 📐</li>
+                <li>English 📚</li>
+                <li>Hindi / French (Optional) 📝</li>
+                <li>Informatics Practices (Optional) 💻</li>
+                <li>Entrepreneurship (Optional) 🚀</li>
+                <li>Legal Studies (Optional) ⚖️</li>
+                <li>Physical Education (Optional) 🏅</li>
+                <li>Applied Mathematics (Optional) 📏</li>
+              </ul>
+            </div>
+          </a>
+
+
+          <!-- Arts Stream -->
+          <a href="arts.html" class="course-link">
+            <div class="course-item">
+              <img src="./../../images/arts.jpg" alt="Arts" />
+              <h4>Arts Stream</h4>
+              <p>
+                The Arts Stream delves into the study of humanities, culture, and
+                society, offering diverse subjects that nurture creativity and
+                critical thinking.
+              </p>
+              <h5>Subjects You'll Encounter:</h5>
+              <ul>
+                <li>History 🏺</li>
+                <li>Political Science 🗳️</li>
+                <li>Geography 🌍</li>
+                <li>Sociology 🧑‍🤝‍🧑</li>
+                <li>Psychology 🧠</li>
+                <li>English 📚</li>
+                <li>Hindi / French (Optional) 📝</li>
+                <li>Philosophy (Optional) 📜</li>
+                <li>Fine Arts (Optional) 🎨</li>
+                <li>Physical Education (Optional) 🏅</li>
+                <li>Home Science (Optional) 🍲</li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+
+
+      <!-- Feedback Section -->
+      <div id="feedback" class="card">
+        <h3>Feedback</h3>
+        <p>We value your feedback! Let us know how we can improve.</p>
+        <form>
+          <label for="feedback-message">Your Message:</label><br>
+          <textarea
+            id="feedback-message"
+            name="feedback-message"
+            rows="5"
+            required
+          ></textarea>
+<br><br><br>
+          <label for="rating">Rate Your Experience:</label>
+          <select id="rating" name="rating" required>
+            <option value="">Select a rating</option>
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3">3 - Good</option>
+            <option value="4">4 - Very Good</option>
+            <option value="5">5 - Excellent</option>
+          </select>
+<br><br><br>
+          <button type="submit" class="btn">Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Chatbot Status Indicator -->
+    <div id="chatbot-status" class="chatbot-status"></div>
+
+
+    <!-- Chatbot Button -->
+    <div class="chatbot-btn" onclick="toggleChatbot()">
+      <i class="bx bx-chat"></i>
+    </div>
+
+
+    <!-- Change Counselor Modal -->
+    <div id="change-counselor-modal" class="modal">
+      <h4>Change Counselor</h4>
+      <form>
+        <label for="reason">Why do you want to change your counselor?</label>
+        <select id="reason" name="reason" required>
+          <option value="">Select a reason</option>
+          <option value="not-available">Counselor is not available</option>
+          <option value="not-helpful">Counselor is not helpful</option>
+          <option value="personal-reasons">Personal reasons</option>
+          <option value="other">Other</option>
+        </select>
+
+
+        <label for="additional-info">Additional Information:</label>
+        <textarea
+          id="additional-info"
+          name="additional-info"
+          rows="5"
+          placeholder="Provide additional details (optional)"
+        ></textarea>
+
+
+        <button type="submit" class="btn">Submit Request</button>
+        <button type="button" class="btn" onclick="closeChangeCounselorModal()">
+          Cancel
+        </button>
+      </form>
+    </div>
+
+
+    <!-- Overlay for Modal -->
+    <div id="overlay" class="overlay"></div>
+   
+    <!-- Book a Session Modal -->
+    <div id="book-session-modal" class="modal">
+      <h4>Book a Counseling Session</h4>
+      <form>
+        <div class="form-group">
+          <label for="counselor">Choose a Counselor:</label>
+          <select id="counselor">
+            <option value="Deepa Panakal">Deepa Panakal</option>
+            <option value="David Woods">David Woods</option>
+            <option value="Ronnie Dawns">Ronnie Dawns</option>
+            <option value="Emily Carpenter">Emily Carpenter</option>
+            <option value="Lisa Brown">Lisa Brown</option>
+            <option value="Sarah Thompson">Sarah Thompson</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Select a Date:</label>
+          <input type="date" id="date" />
+        </div>
+        <div class="form-group">
+          <label for="time">Available Time Slots:</label>
+          <select id="time">
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="2:00 PM">2:00 PM</option>
+            <option value="3:00 PM">3:00 PM</option>
+            <option value="4:00 PM">4:00 PM</option>
+          </select>
+        </div>
+        <button type="button" class="btn" onclick="bookSession()">Book Now</button>
+        <button type="button" class="btn" onclick="closeBookSessionModal()">
+          Cancel
+        </button>
+      </form>
+      <div id="confirmation"></div>
+    </div>
+
+
+    <script>
+      // Show content function
+      function showContent(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll(".card, .counseling-container");
+        sections.forEach((section) => (section.style.display = "none"));
+
+
+        // Show the selected section
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+          selectedSection.style.display = "block";
+        }
+      }
+
+
+      // Show the Aptitude Tests section by default
+      showContent("aptitude-tests");
+
+
+      // Function to enable/disable Join Session button based on time
+      function checkSessionTime() {
+        const joinButton = document.querySelector(".join-btn");
+        if (joinButton) {
+          const sessionTime = new Date(joinButton.getAttribute("data-time"));
+          const currentTime = new Date();
+
+
+          // Enable the button if the session time has arrived
+          if (currentTime >= sessionTime) {
+            joinButton.disabled = false;
+          } else {
+            joinButton.disabled = true;
+          }
+        }
+      }
+
+
+      // Check session time every second
+      setInterval(checkSessionTime, 1000);
+
+
+      // Function to join a session
+      function joinSession() {
+        alert("Joining session...");
+        // Redirect to a video call page or open a video call modal
+        window.location.href = "../video call/vc.html";
+      }
+
+
+      // Function to open the Change Counselor modal
+      function openChangeCounselorModal() {
+        const modal = document.getElementById("change-counselor-modal");
+        const overlay = document.getElementById("overlay");
+
+
+        // Show the modal and overlay
+        modal.style.display = "block";
+        overlay.style.display = "block";
+      }
+
+
+      // Function to close the Change Counselor modal
+      function closeChangeCounselorModal() {
+        const modal = document.getElementById("change-counselor-modal");
+        const overlay = document.getElementById("overlay");
+
+
+        // Hide the modal and overlay
+        modal.style.display = "none";
+        overlay.style.display = "none";
+      }
+     
+      // Function to open the Book a Session modal
+      function openBookSessionModal() {
+        const modal = document.getElementById("book-session-modal");
+        const overlay = document.getElementById("overlay");
+
+
+        // Show the modal and overlay
+        modal.style.display = "block";
+        overlay.style.display = "block";
+      }
+
+
+      // Function to close the Book a Session modal
+      function closeBookSessionModal() {
+        const modal = document.getElementById("book-session-modal");
+        const overlay = document.getElementById("overlay");
+
+
+        // Hide the modal and overlay
+        modal.style.display = "none";
+        overlay.style.display = "none";
+      }
+
+
+      // Function to book a session
+      function bookSession() {
+        const counselor = document.getElementById("counselor").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+        const confirmation = document.getElementById("confirmation");
+
+
+        if (counselor && date && time) {
+          confirmation.textContent = `Session booked with ${counselor} on ${date} at ${time}.`;
+          // Close the modal after 2 seconds
+          setTimeout(() => {
+            closeBookSessionModal();
+          }, 2000);
+        } else {
+          confirmation.textContent = "Please fill out all fields to book a session.";
+        }
+      }
+
+
+      // Sign Out Functionality
+      function signOut() {
+        window.location.href = "./../roleselection.html";
+      }
+
+
+      // Chatbot Functions
+      function showChatbotMessage(message, isError = true) {
+        const statusElement = document.getElementById('chatbot-status');
+        statusElement.textContent = message;
+        statusElement.style.display = 'block';
+       
+        if (isError) {
+          statusElement.style.backgroundColor = '#f8d7da';
+          statusElement.style.color = '#721c24';
+        } else {
+          statusElement.style.backgroundColor = '#d4edda';
+          statusElement.style.color = '#155724';
+        }
+       
+        setTimeout(() => {
+          statusElement.style.display = 'none';
+        }, 5000);
+      }
+
+
+      function toggleChatbot() {
+        if (!window.botpressWebChat) {
+          showChatbotMessage('Chatbot is still loading. Please wait...');
+          return;
+        }
+       
+        try {
+          window.botpressWebChat.sendEvent({ type: 'toggle' });
+        } catch (error) {
+          showChatbotMessage('Error opening chatbot. Please try again.');
+          console.error('Chatbot toggle error:', error);
+        }
+      }
+
+
+      // Load the chatbot with better error handling
+      function loadChatbot() {
+        // Check if already loaded
+        if (window.botpressWebChat) return;
+       
+        const script = document.createElement('script');
+        script.src = 'https://cdn.botpress.cloud/webchat/v2.2/inject.js';
+        script.async = true;
+       
+        script.onload = function() {
+          try {
+            window.botpressWebChat.init({
+              composerPlaceholder: "Ask me anything about careers...",
+              botConversationDescription: "DigiLift AI Career Assistant",
+              botId: "2025/01/29/16/20250129163329-QCV2OA8X",
+              hostUrl: "https://cdn.botpress.cloud/webchat/v2.2",
+              messagingUrl: "https://messaging.botpress.cloud",
+              clientId: "2025/01/29/16/20250129163329-QCV2OA8X",
+              webhookId: "e3c4d9a1-0d5e-4a1e-b5a1-0d5e4a1eb5a1",
+              lazySocket: true,
+              themeName: "prism",
+              frontendVersion: "v2.2",
+              showPoweredBy: false,
+              theme: {
+                primaryColor: "#2c698d",
+                secondaryColor: "#272643",
+                backgroundColor: "#ffffff",
+                textColor: "#272643",
+                fontFamily: "'Poppins', sans-serif",
+              }
+            });
+            showChatbotMessage('Chatbot is ready! Click the chat button to start.', false);
+          } catch (error) {
+            showChatbotMessage('Failed to initialize chatbot. Please refresh the page.');
+            console.error('Chatbot init error:', error);
+          }
+        };
+       
+        script.onerror = function() {
+          showChatbotMessage('Failed to load chatbot service. Check your internet connection.');
+        };
+       
+        document.body.appendChild(script);
+       
+        // Fallback timeout
+        setTimeout(() => {
+          if (!window.botpressWebChat) {
+            showChatbotMessage('Chatbot is taking longer than usual to load...');
+          }
+        }, 5000);
+      }
+
+
+      // Counseling functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const studentId = localStorage.getItem("studentId"); // Assuming student is logged in
+     
+        if (!studentId) {
+          alert("Please log in first!");
+          return;
+        }
+     
+        // Fetch and display counselors
+        function fetchCounselors() {
+          fetch("http://localhost:4000/counselors")
+            .then((res) => res.json())
+            .then((counselors) => {
+              console.log("Counselors fetched:", counselors);
+              const list = document.getElementById("counselorList");
+              list.innerHTML = "";
+
+
+              if (counselors.length === 0) {
+                list.innerHTML = "<li>No counselors available.</li>";
+                return;
+              }
+
+
+              counselors.forEach((counselor) => {
+                const li = document.createElement("li");
+
+
+                // Create a request button
+                const requestButton = document.createElement("button");
+                requestButton.textContent = "Request Counseling";
+                requestButton.classList.add("request-btn");
+                requestButton.onclick = () => requestCounseling(counselor._id);
+
+
+                // Add counselor details and button to the list
+                li.innerHTML = `${counselor.name} (Experience: ${counselor.experience} years)`;
+                li.appendChild(requestButton);
+                list.appendChild(li);
+              });
+            })
+            .catch((err) => console.error("Error fetching counselors:", err));
+        }
+
+
+        window.fetchCounselors = fetchCounselors;
+       
+        // Send a counseling request
+        function requestCounseling(counselorId) {
+          fetch("http://localhost:4000/request-counseling", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ studentId, counselorId }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              alert(data.message);
+              fetchStudentRequests(); // Refresh requests after sending
+            })
+            .catch((err) => console.error("Error requesting counseling:", err));
+        }
+     
+        // Fetch and display student's counseling requests
+        function fetchStudentRequests() {
+          fetch(`http://localhost:4000/student-requests/${studentId}`)
+            .then((res) => res.json())
+            .then((requests) => {
+              const list = document.getElementById("studentRequests");
+              list.innerHTML = "";
+     
+              requests.forEach((req) => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                  Counselor: ${req.counselorId.name} | Status: ${req.status}
+                 ${req.status === "Accepted" ? `
+              <br>📅 Date: ${req.date}
+              <br>⏰ Time: ${req.time}
+              <br>💬 Meeting Details: ${req.meetingDetails || "Not provided"}
+            ` : ""}
+                `;
+                list.appendChild(li);
+              });
+            })
+            .catch((err) => console.error("Error fetching student requests:", err));
+        }
+     
+        // Initial Fetch Calls
+        fetchCounselors();
+        fetchStudentRequests();
+       
+        // Load the chatbot after everything else is ready
+        // loadChatbot();
+        
+      });
+    </script>
+         <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+         <script src="https://files.bpcontent.cloud/2025/01/29/16/20250129163329-QCV2OA8X.js"></script>
+  </body>
+</html>
+

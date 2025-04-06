@@ -1,0 +1,88 @@
+
+{
+  
+  
+  
+    "subjects": {
+      "math": { "stream": "PCM", "career": "Engineering, Data Science, AI Researcher, Statistician" },
+      "physics": { "stream": "PCM", "career": "Engineer, Physicist, Astronomer, Robotics Expert" },
+      "chemistry": { "stream": "PCB or PCMB", "career": "Pharmacist, Chemical Engineer, Biochemist" },
+      "biology": { "stream": "PCB", "career": "Doctor, Biologist, Pharmacist, Geneticist" },
+      "computer science": { "stream": "PCM or PCMB", "career": "Software Engineer, AI Developer, Cybersecurity Expert" },
+      "economics": { "stream": "Commerce", "career": "Economist, Financial Analyst, Business Strategist" },
+      "accounting": { "stream": "Commerce", "career": "Accountant, Auditor, Financial Advisor" },
+      "history": { "stream": "Arts", "career": "Historian, Archaeologist, Researcher" },
+      "literature": { "stream": "Arts", "career": "Writer, Editor, Journalist" },
+      "psychology": { "stream": "Arts or PCB", "career": "Psychologist, Counselor, Mental Health Specialist" },
+      "political science": { "stream": "Arts", "career": "Politician, Diplomat, Lawyer" }
+    },
+  
+  "emotions": {
+      "joy": [
+        "happy", "excited", "love", "passionate", "joyful", "cheerful", "content", "delighted", "enthusiastic", "thrilled", "elated", "euphoric",
+        "lively", "grateful", "hopeful", "optimistic", "amused", "satisfied", "sunny", "radiant", "vivacious", "energetic", "gleeful", "ecstatic",
+        "inspired", "smiling", "cheery", "laughing", "playful", "positive", "fun", "upbeat", "hilarious", "jovial", "gleaming", "bright", "exuberant"
+      ],
+      "fear": [
+        "scared", "worried", "anxious", "nervous", "fearful", "terrified", "apprehensive", "uneasy", "panicked", "doubtful", "stressed",
+        "shaky", "alarmed", "hesitant", "petrified", "timid", "vulnerable", "restless", "dread", "intimidated", "uncertain", "tense",
+        "horrified", "shocked", "hesitating", "pessimistic", "overwhelmed", "pressured", "paralyzed", "on edge", "trembling", "worrying"
+      ],
+      "anger": [
+        "angry", "furious", "annoyed", "frustrated", "outraged", "irritated", "resentful", "enraged", "infuriated", "bitter", "agitated",
+        "hostile", "mad", "fuming", "upset", "vindictive", "aggressive", "wrathful", "offended", "provoked", "displeased", "heated",
+        "sullen", "exasperated", "insulted", "irate", "boiling", "bristling", "stubborn", "rebellious", "combative", "vindictive", "envious"
+      ],
+      "sadness": [
+        "sad", "depressed", "upset", "lonely", "miserable", "heartbroken", "gloomy", "hopeless", "tearful", "grieving", "melancholy",
+        "despondent", "forlorn", "mournful", "dejected", "sorrowful", "heavyhearted", "disheartened", "distressed", "pessimistic",
+        "hopeless", "weary", "miserable", "downtrodden", "somber", "downcast", "moody", "forlorn", "crying", "regretful", "suffering"
+      ],
+      "curiosity": [
+        "curious", "interested", "learning", "discover", "explore", "inquisitive", "eager", "questioning", "analytical", "investigate",
+        "probe", "detective", "observe", "wondering", "inquiring", "searching", "studious", "inquiring", "inventive", "examining",
+        "fascinated", "knowledge-seeking", "pondering", "enlightened", "intellectual", "mindful", "inquiring", "thoughtful"
+      ],
+      "determination": [
+        "strong", "persistent", "focused", "goal", "ambitious", "driven", "motivated", "unstoppable", "dedicated", "committed",
+        "persevering", "hardworking", "resilient", "unstoppable", "tenacious", "disciplined", "diligent", "steadfast", "undaunted",
+        "strong-willed", "relentless", "passionate", "unshakable", "unbreakable", "iron-willed", "relentless", "fierce", "unwavering"
+      ]
+    },
+    "careers": {
+      "joy": { "career": "Creative Fields (Writer, Artist, Designer, Musician)", "stream": "Arts" },
+      "fear": { "career": "Crisis Management, Emergency Services, Risk Analysis", "stream": "PCB (Biology/Medical)" },
+      "anger": { "career": "Law, Social Activism, Politics, Debate", "stream": "Arts or Commerce" },
+      "sadness": { "career": "Psychology, Counseling, Mental Health Support", "stream": "Arts or PCB (Psychology/Biology)" },
+      "curiosity": { "career": "Research, Science, Journalism, Exploration", "stream": "PCM or PCMB" },
+      "determination": { "career": "Entrepreneurship, Leadership, Military, Sports", "stream": "Commerce or PCM" }
+    },
+    "confidence_words": [
+      "can", "will", "achieve", "success", "dream", "confident", "certain", "capable", "strong", "sure", "determined", "focused",
+      "persistent", "goal-oriented", "motivated", "powerful", "unstoppable", "fearless", "bold", "resilient", "brave", "self-reliant",
+      "assured", "tenacious", "empowered", "independent", "self-sufficient"
+    ],
+    "biases": [
+      { "phrase": "can't", "message": "You might be experiencing self-doubt (Impostor Syndrome). Keep believing in yourself!" },
+      { "phrase": "not good", "message": "It seems like you have low confidence. You are more capable than you think!" },
+      { "phrase": "fail", "message": "Fear of failure detected. Remember, failure is a step toward success!" },
+      { "phrase": "give up", "message": "You may be feeling hopeless, but persistence is key to success!" },
+      { "phrase": "stupid", "message": "Don't put yourself down! Intelligence is not fixed; keep learning and growing!" },
+      { "phrase": "useless", "message": "Every person has unique strengths. Keep exploring yours!" }
+    ],
+    "personality_traits": {
+      "analyst": [
+        "logic", "analyze", "rational", "strategy", "intellectual", "critical", "problem-solver", "thinker", "systematic",
+        "planner", "objective", "insightful", "inventor", "scientist", "theorist", "researcher"
+      ],
+      "feeler": [
+        "express", "feel", "connect", "emotional", "empathetic", "sensitive", "compassionate", "nurturing", "caring",
+        "listener", "supportive", "kind-hearted", "people-oriented", "social", "harmonizer"
+      ],
+      "performer": [
+        "stage", "perform", "social", "extrovert", "charismatic", "confident", "energetic", "entertainer", "persuasive",
+        "spontaneous", "talkative", "dramatic", "bold", "showman", "enthusiastic"
+      ]
+    }
+  }
+  

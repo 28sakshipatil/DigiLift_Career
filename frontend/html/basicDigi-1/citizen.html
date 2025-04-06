@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Citizen Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+    async function loadDocs() {
+      const aadhaar = localStorage.getItem("aadhaar");
+      const response = await fetch(`http://localhost:4000/documents/${aadhaar}`);
+      const docs = await response.json();
+  
+      let html = "<tr><th>File Name</th><th>Label</th><th>Download</th><th>Analyze</th></tr>";
+  
+      docs.forEach((doc) => {
+          html += `<tr>
+                      <td>${doc.filename}</td>
+                      <td>${doc.label}</td>
+                      <td><a href="${doc.fileUrl}" download>Download</a></td>
+                      <td>
+                        ${doc.label.toLowerCase() === "marksheet" 
+                            ? `<button onclick="analyzeMarks('${doc.fileUrl}', this)">Analyze</button>
+                               <button class="goBackButton" style="display: none; margin-top: 10px;" onclick="goBackToText()">Go Back to Text</button>` 
+                            : "N/A"}
+                    </td>
+
+                   </tr>`;
+      });
+  
+      document.getElementById("docs").innerHTML = html;
+  }
+  async function analyzeMarks(fileUrl, analyzeButton) {
+    console.log("📜 Sending file for analysis:", fileUrl);
+
+    const response = await fetch("http://localhost:4000/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fileUrl })
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+        alert("❌ Error analyzing marksheet");
+        return;
+    }
+
+    console.log("✅ Extracted Marks:", data.marks);
+
+    if (!data.marks) {
+        alert("❌ No marks extracted. Check OCR results.");
+        return;
+    }
+
+    const marksData = {
+        English: data.marks["ENGLISH LNG & LIT."] || data.marks["ENGLISH"] || 0,
+        Maths: data.marks["MATHEMATICS STANDARD"] || data.marks["MATHEMATICS"] || data.marks["MATHS"] || 0,
+        Science: data.marks["SCIENCE - THEORY"] || data.marks["SCIENCE"] || data.marks["SCIENCE THEORY"] || 0
+    };
+
+    console.log("📊 Saving Marks to Local Storage:", marksData);
+    localStorage.setItem("marks", JSON.stringify(marksData));
+
+    alert("📊 Marks saved successfully in Local Storage!");
+
+    // 🎯 Show "Go Back to Text" Button (Find the button in the same row)
+    const goBackButton = analyzeButton.nextElementSibling;
+    if (goBackButton) {
+        goBackButton.style.display = "block";
+    }
+}
+
+function goBackToText() {
+    window.location.href = "./../prediction/predict.html"; // Replace with actual text page URL
+}
+
+//   async function analyzeMarks(fileUrl) {
+//     console.log("📜 Sending file for analysis:", fileUrl);
+
+//     const response = await fetch("http://localhost:4000/analyze", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ fileUrl })
+//     });
+
+//     const data = await response.json();
+
+//     if (data.error) {
+//         alert("❌ Error analyzing marksheet");
+//         return;
+//     }
+
+//     console.log("✅ Extracted Marks:", data.marks);
+
+//     // ✅ Ensure `data.marks` Exists
+//     if (!data.marks) {
+//         alert("❌ No marks extracted. Check OCR results.");
+//         return;
+//     }
+
+//     // 🎯 Extract & Store Only Required Subjects
+//     const marksData = {
+//         English: data.marks["ENGLISH LNG & LIT."] || data.marks["ENGLISH"] || 0,
+//         Maths: data.marks["MATHEMATICS STANDARD"] || data.marks["MATHEMATICS"] || data.marks["MATHS"] || 0,
+//         Science: data.marks["SCIENCE - THEORY"] || data.marks["SCIENCE"] || data.marks["SCIENCE THEORY"] || 0
+//     };
+//  // 🎯 Show "Go Back to Text" Button
+//  document.getElementById("goBackButton").style.display = "block";
+//     console.log("📊 Saving Marks to Local Storage:", marksData);
+
+//     localStorage.setItem("marks", JSON.stringify(marksData));
+
+//     alert("📊 Marks saved successfully in Local Storage!");
+// }
+
+// function goBackToText() {
+//     window.location.href = "./../prediction/predict.html"; // Replace with actual text page URL
+// }
+    
+    
+      function logout() {
+        localStorage.clear();
+        window.location.href = "basicindex.html";
+      }
+    </script>
+  </head>
+  <body onload="loadDocs()">
+    <div class="container">
+      <h2>Citizen Dashboard</h2>
+      <h3>Your Documents</h3>
+      <table id="docs"></table>
+      
+      <button onclick="logout()">Logout</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <div class="container">
+    <!-- ✅ Document Upload Form -->
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label>Aadhaar Number (Citizen):</label>
+        <input type="text" id="aadhaar" required>
+<br>
+        <label>Document Label:</label>
+        <select id="label" required>
+            <option value="Aadhaar Card">Aadhaar Card</option>
+            <option value="Marksheet">Marksheet</option>
+            <option value="PAN Card">PAN Card</option>
+            <option value="Driving License">Driving License</option>
+            <option value="Voter ID">Voter ID</option>
+            <option value="Other">Other</option>
+        </select>
+<br>
+        <label>Upload File:</label>
+        <input type="file" id="file" required>
+
+        <button type="submit">Upload Document</button>
+    </form>
+</div>
+    <h2>Uploaded Documents</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Label</th>
+                <th>Aadhaar</th>
+                <th>Uploaded At</th>
+                <th>Download</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="documentTable">
+            <!-- Documents will be dynamically loaded here -->
+        </tbody>
+    </table>
+    <button onclick="logout()">Logout</button>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

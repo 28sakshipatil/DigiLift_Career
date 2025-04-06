@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login/Register | DigiLift Careers - Counselors</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        color: #333;
+        line-height: 1.6;
+        background-color: #e3f6f5;/* Light grey background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* height: 100vh; */
+      }
+
+      .wrapper {
+        width: 420px;
+        background-color: #ffffff; /* Pure white background */
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        padding: 30px 40px;
+        margin-top:90px ;
+      }
+
+      .welcome-message {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .welcome-message h2 {
+        font-size: 1.5rem;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .welcome-message p {
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      .wrapper h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .wrapper h1::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: #333; /* Black line */
+        margin: 10px auto 0;
+        border-radius: 2px;
+      }
+
+      .input-box {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .input-box input {
+        width: 100%;
+        padding: 12px 40px 12px 20px;
+        border: 1px solid #ddd; /* Light grey border */
+        border-radius: 30px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f9f9f9; /* Light grey background */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .input-box input:focus {
+        border-color: #333; /* Black border on focus */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        outline: none;
+      }
+
+      .input-box i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #555; /* Dark grey icons */
+        font-size: 1.2rem;
+      }
+
+      .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      .remember-forgot label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .remember-forgot a {
+        color: #333; /* Black link */
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .remember-forgot a:hover {
+        color: #555; /* Darker grey on hover */
+      }
+
+      .btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #333; /* Black button */
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #555; /* Darker grey on hover */
+        transform: translateY(-3px);
+      }
+
+      .register-link {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      .register-link a {
+        color: #333; /* Black link */
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .register-link a:hover {
+        color: #555; /* Darker grey on hover */
+      }
+
+      /* Hide registration form by default */
+      #registerForm {
+        display: none;
+        
+      }
+
+      .active {
+        display: block;
+      }
+
+      .inactive {
+        display: none;
+      }
+      .counRegi{
+        
+      }
+      
+      /* Dashboard (Top Navigation Bar) */
+      .dashboard {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff; /* Pure white */
+        color: #333;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+      }
+
+      .dashboard .logo {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .dashboard .auth-links a {
+        margin-left: 20px;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+        transition: color 0.3s ease;
+      }
+
+      .dashboard .auth-links a:hover {
+        color: #555; /* Darker grey for hover */
+      }
+    </style>
+  </head>
+  <body>
+
+     
+
+    <div class="wrapper">
+       <!-- Dashboard (Top Navigation Bar) -->
+  <div class="dashboard">
+    <div class="logo">DigiLift Careers</div>
+    <div class="auth-links">
+      <!-- <a href="/frontend/html/login/loginCV.html">Login</a> -->
+      <a href="../about-us.html">Home</a>
+      <!-- <a href="roleselection.html">Signup</a> -->
+      <a href="mailto:info@digiliftcareers.com">Contact</a>
+    </div>
+  </div>
+      <!-- Welcome Message for Login -->
+      <div id="loginWelcome" class="welcome-message active">
+        <h2>Welcome Back! 👋</h2>
+        <p>We're glad to see you again. Let's get you back on track.</p>
+      </div>
+
+      <!-- Welcome Message for Registration -->
+      <div id="registerWelcome" class="welcome-message inactive">
+        <h2>Welcome! 🎉</h2>
+        <p>We're thrilled to have you join us. Let's get started!</p>
+      </div>
+
+      <!-- Counselor Login Form -->
+      <form id="loginForm" class="active" onsubmit="loginFormHandler(event)">
+        <h1>Counselor Login</h1>
+        <div class="input-box">
+          <input
+            type="text"
+            id="login-username"
+            placeholder="Username"
+            required
+          />
+          <i class="bx bxs-user"></i>
+        </div>
+
+        <div class="input-box">
+          <input
+            type="password"
+            id="login-password"
+            placeholder="Password"
+            required
+          />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <div class="remember-forgot">
+          <label><input type="checkbox" /> Remember me</label>
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+
+        <div class="register-link">
+          <p>
+            Don't have an account?
+            <a href="#" id="showRegister">Register as Counselor</a>
+          </p>
+        </div>
+        <p>username: sakshic <br> pwd: SakshiC@04</p>
+      </form>
+
+      <!-- Counselor Registration Form -->
+       <DIV class="counRegi">
+      <form id="registerForm" class="inactive" onsubmit="registerFormHandler(event)">
+        <h1>Counselor Registration</h1>
+
+        <div class="input-box">
+          <input type="text" id="name" placeholder="Full Name" required />
+          <i class="bx bxs-user"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="email" id="email" placeholder="Email" required />
+          <i class="bx bxs-envelope"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="text" id="username" placeholder="Username" required />
+          <i class="bx bxs-user"></i>
+        </div>
+
+        <div class="input-box">
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <div class="input-box">
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder="Confirm Password"
+            required
+          />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <div class="input-box">
+          <input
+            type="text"
+            id="highestQualification"
+            placeholder="Highest Qualification"
+            required
+          />
+          <i class="bx bxs-graduation"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="text"
+            id="experience"
+            placeholder="Experience"
+            required
+          />
+          <i class="bx bxs-experience"></i>
+        </div>
+
+        <button type="submit" class="btn">Register as Counselor</button>
+
+        <div class="register-link">
+          <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const showRegister = document.getElementById("showRegister");
+      const showLogin = document.getElementById("showLogin");
+      const loginForm = document.getElementById("loginForm");
+      const registerForm = document.getElementById("registerForm");
+      const loginWelcome = document.getElementById("loginWelcome");
+      const registerWelcome = document.getElementById("registerWelcome");
+
+      showRegister.addEventListener("click", (e) => {
+        e.preventDefault();
+        loginForm.style.display = "none";
+        registerForm.style.display = "block";
+        loginWelcome.style.display = "none";
+        registerWelcome.style.display = "block";
+      });
+
+      showLogin.addEventListener("click", (e) => {
+        e.preventDefault();
+        loginForm.style.display = "block";
+        registerForm.style.display = "none";
+        loginWelcome.style.display = "block";
+        registerWelcome.style.display = "none";
+      });
+
+      const loginFormHandler = async (e) => {
+        e.preventDefault();
+        const username = document.getElementById("login-username").value;
+        const password = document.getElementById("login-password").value;
+
+        try {
+          const res = await fetch("http://localhost:4000/counselor/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+          });
+
+          if (!res.ok) {
+            // const data = await res.json();
+            alert(data.message || "Login failed!");
+            return;
+          }
+
+          const data = await res.json();
+          localStorage.setItem("counselorId", data.counselorId); // Ensure it's lowercase "counselorId"
+ // Store user ID in local storage
+          alert("Login successful!");
+          window.location.href = "./../dashboard/dashboardcoun.html";
+        } catch (error) {
+          alert("An error occurred. Please try again later.");
+          console.error("Login error:", error);
+        }
+      };
+
+      const registerFormHandler = async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+        const highestQualification = document.getElementById(
+          "highestQualification"
+        ).value;
+        const experience = document.getElementById(
+          "experience"
+        ).value;
+
+        if (password !== confirmPassword) {
+          alert("Passwords do not match!");
+          return;
+        }
+
+        try {
+          const res = await fetch("http://localhost:4000/counselor/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name,
+              email,
+              password,
+              username,
+              highestQualification,
+              experience
+            }),
+          });
+
+          if (!res.ok) {
+            const data = await res.json();
+            alert(data.message || "Registration failed!");
+            return;
+          }
+
+          const data = await res.json();
+          localStorage.setItem("counselorId", data.counselorId); // Ensure it's lowercase "counselorId"
+// Store user ID in local storage
+          alert("Registration successful!");
+          window.location.href = "./../dashboard/dashboardcoun.html";
+        } catch (error) {
+          alert("An error occurred. Please try again later.");
+          console.error("Registration error:", error);
+        }
+      };
+    </script>
+  </body>
+</html>

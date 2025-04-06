@@ -1,0 +1,172 @@
+/* General Page Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e3f2fd;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Centered Container */
+.container {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+h1, h2 {
+    color: #007bff;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #333;
+    text-align: left;
+    width: auto; /* ✅ Auto width for label */
+}
+
+/* Input Fields */
+input, select {
+    width: auto;  /* ✅ Auto width */
+    min-width: 200px; /* Prevents shrinking too much */
+    max-width: 100%; /* Ensures responsiveness */
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* File Input */
+input[type="file"] {
+    padding: 5px;
+}
+
+/* Button Styling */
+button {
+    width: auto;  /* ✅ Auto width */
+    min-width: 120px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button {
+    background: #007bff;
+    color: white;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Table Styling */
+table {
+    width: 95%;
+    margin: 15px auto;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+/* Delete Button */
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+/* Logout Button */
+.logout-btn {
+    background: #dc3545;
+    width: 120px;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+.logout-btn:hover {
+    background: #a71d2a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    input, select, button {
+        width: auto;
+        min-width: 180px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+}
+.back-btn {
+    display: inline-block;
+    /* margin-bottom: 20px; */
+    margin-top:40px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #555;
+    transform: translateY(-3px);
+}

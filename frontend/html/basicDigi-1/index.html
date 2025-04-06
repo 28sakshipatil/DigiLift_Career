@@ -1,0 +1,58 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>DigiLocker - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script>
+        async function login() {
+            const aadhaar = document.getElementById("aadhaar").value;
+            const password = document.getElementById("password").value;
+
+            const response = await fetch("http://localhost:4000/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ aadhaar, password })
+            });
+
+            const data = await response.json();
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("role", data.role);
+                localStorage.setItem("aadhaar", aadhaar);
+                window.location.href = data.role === "admin" ? "admin.html" : "citizen.html";
+            } else {
+                alert("Invalid Credentials");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div class="container1">
+            <a href="./../dashboard/dashboardstu.html" class="back-btn">← Back to Dashboard</a>
+        </div>
+    <div class="container">
+        <h2>Login</h2>
+        <input type="text" id="aadhaar" placeholder="Aadhaar Number"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button onclick="login()">Login</button>
+        <p>Admin? Aadhaar: <b>000000000000</b>, Password: <b>admin123</b></p>
+        <p>Citizen? Aadhaar: <b>123456789123</b>, Password: <b>user123</b></p>
+        <p>New user? <a href="signup.html">Sign Up</a></p>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Go to file basicindex.html it has been changed
+</body>
+</html>

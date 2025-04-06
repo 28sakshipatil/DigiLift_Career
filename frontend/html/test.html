@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aptitude Test | CareerVista</title>
+    <style>
+      /* Global Styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+        color: #000;
+      }
+
+      .welcome-note,
+      .rules,
+      .instructions {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #e0e0e0;
+        border-radius: 8px;
+      }
+
+      .rules ul,
+      .instructions ul {
+        padding-left: 20px;
+      }
+
+      .rules li,
+      .instructions li {
+        margin-bottom: 10px;
+      }
+
+      .question {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        -webkit-user-select: none; /* Prevent copying */
+      }
+
+      .question p {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .question label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .submit-button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .submit-button:hover {
+        background-color: #333;
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #e0e0e0;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Welcome Note -->
+      <div class="welcome-note">
+        <h1>Let's begin with Aptitude Test!</h1>
+        <p>
+          This test will help you discover your strengths and interests in various
+          fields. Take your time and answer honestly.
+        </p>
+      </div>
+
+      <!-- Rules -->
+      <div class="rules">
+        <h2>Rules to Follow</h2>
+        <ul>
+          <li>Do not copy or share the questions.</li>
+          <li>Answer all questions to get accurate results.</li>
+          <li>Take your time and think carefully before answering.</li>
+          <li>Do not refresh the page during the test.</li>
+        </ul>
+      </div>
+
+      <!-- Instructions -->
+      <div class="instructions">
+        <h2>Instructions</h2>
+        <ul>
+          <li>The test is divided into two parts.</li>
+          <li>Each part contains 10 questions.</li>
+        </ul>
+      </div>
+
+      <!-- Part 1 -->
+      <div id="part1">
+        <h2>Part 1</h2>
+        <!-- Questions for Part 1 -->
+        <div class="question">
+          <p>What skill do you want to develop?</p>
+          <label><input type="radio" name="q1" value="Technology" /> Programming</label>
+          <label><input type="radio" name="q1" value="Business" /> Leadership</label>
+          <label><input type="radio" name="q1" value="Arts" /> Design</label>
+          <label><input type="radio" name="q1" value="Law" /> Legal analysis</label>
+        </div>
+        <div class="question">
+          <p>What kind of impact do you want to make?</p>
+          <label><input type="radio" name="q2" value="Law" /> Reforming laws and policies</label>
+          <label><input type="radio" name="q2" value="Environment" /> Promoting sustainability</label>
+          <label><input type="radio" name="q2" value="Healthcare" /> Advancing healthcare solutions</label>
+          <label><input type="radio" name="q2" value="Technology" /> Creating tech innovations</label>
+        </div>
+        <div class="question">
+          <p>Which global issue do you want to address?</p>
+          <label><input type="radio" name="q3" value="Environment" /> Environmental degradation</label>
+          <label><input type="radio" name="q3" value="Healthcare" /> Access to healthcare</label>
+          <label><input type="radio" name="q3" value="Law" /> Legal inequalities</label>
+          <label><input type="radio" name="q3" value="Business" /> Economic disparities</label>
+        </div>
+        <div class="question">
+          <p>How do you prefer solving challenges?</p>
+          <label><input type="radio" name="q4" value="Technology" /> Technical solutions</label>
+          <label><input type="radio" name="q4" value="Business" /> Data-driven strategies</label>
+          <label><input type="radio" name="q4" value="Arts" /> Creative storytelling</label>
+          <label><input type="radio" name="q4" value="Law" /> Legal frameworks</label>
+        </div>
+        <div class="question">
+          <p>What inspires your career goals?</p>
+          <label><input type="radio" name="q5" value="Entrepreneurship" /> Innovating new ideas</label>
+          <label><input type="radio" name="q5" value="Entrepreneurship" /> Leading a startup</label>
+          <label><input type="radio" name="q5" value="Business" /> Climbing the corporate ladder</label>
+          <label><input type="radio" name="q5" value="Technology" /> Solving global problems</label>
+        </div>
+        <div class="question">
+          <p>How do you measure success?</p>
+          <label><input type="radio" name="q6" value="Business" /> Achieving organizational goals</label>
+          <label><input type="radio" name="q6" value="Entrepreneurship" /> Launching a successful venture</label>
+          <label><input type="radio" name="q6" value="Technology" /> Creating innovative solutions</label>
+          <label><input type="radio" name="q6" value="Arts" /> Impacting people through creativity</label>
+        </div>
+        <div class="question">
+          <p>What excites you in business?</p>
+          <label><input type="radio" name="q7" value="Business" /> Strategic management</label>
+          <label><input type="radio" name="q7" value="Business" /> Marketing and promotions</label>
+          <label><input type="radio" name="q7" value="Business" /> Financial growth</label>
+          <label><input type="radio" name="q7" value="Entrepreneurship" /> Scaling startups</label>
+        </div>
+        <div class="question">
+          <p>What inspires you in the tech world?</p>
+          <label><input type="radio" name="q8" value="Technology" /> Machine learning models</label>
+          <label><input type="radio" name="q8" value="Technology" /> IoT and smart devices</label>
+          <label><input type="radio" name="q8" value="Technology" /> Cloud computing</label>
+          <label><input type="radio" name="q8" value="Arts" /> Designing intuitive interfaces</label>
+        </div>
+        <div class="question">
+          <p>What motivates you to succeed?</p>
+          <label><input type="radio" name="q9" value="Entrepreneurship" /> Bringing new ideas to life</label>
+          <label><input type="radio" name="q9" value="Technology" /> Solving technical challenges</label>
+          <label><input type="radio" name="q9" value="Business" /> Managing successful projects</label>
+          <label><input type="radio" name="q9" value="Arts" /> Creating impactful designs</label>
+        </div>
+        <div class="question">
+          <p>How do you stay engaged in a project?</p>
+          <label><input type="radio" name="q10" value="Business" /> Managing teams effectively</label>
+          <label><input type="radio" name="q10" value="Technology" /> Solving technical challenges</label>
+          <label><input type="radio" name="q10" value="Arts" /> Exploring creative solutions</label>
+          <label><input type="radio" name="q10" value="Law" /> Drafting policies and contracts</label>
+        </div>
+        <!-- Add 25 more questions for Part 1 -->
+      </div>
+
+      <!-- Part 2 (Hidden Initially) -->
+      <div id="part2" class="hidden">
+        <h2>Part 2</h2>
+        <!-- Questions for Part 2 -->
+        <div class="question">
+          <p>How do you approach new challenges?</p>
+          <label><input type="radio" name="q36" value="Technology" /> By creating innovative solutions</label>
+          <label><input type="radio" name="q36" value="Business" /> By developing strategies</label>
+          <label><input type="radio" name="q36" value="Law" /> Through legal research</label>
+          <label><input type="radio" name="q36" value="Arts" /> By exploring creative ideas</label>
+        </div>
+        <div class="question">
+          <p>What motivates your career aspirations?</p>
+          <label><input type="radio" name="q37" value="Technology" /> Building innovative products</label>
+          <label><input type="radio" name="q37" value="Business" /> Leading organizational changes</label>
+          <label><input type="radio" name="q37" value="Law" /> Making legal reforms</label>
+          <label><input type="radio" name="q37" value="Healthcare" /> Advancing public health</label>
+        </div>
+        <div class="question">
+          <p>Which skill do you enjoy enhancing?</p>
+          <label><input type="radio" name="q38" value="Technology" /> Programming and debugging</label>
+          <label><input type="radio" name="q38" value="Arts" /> Designing and illustrating</label>
+          <label><input type="radio" name="q38" value="Business" /> Strategic planning</label>
+          <label><input type="radio" name="q38" value="Law" /> Legal analysis</label>
+        </div>
+        <div class="question">
+          <p>What drives your curiosity?</p>
+          <label><input type="radio" name="q39" value="Technology" /> AI and data-driven insights</label>
+          <label><input type="radio" name="q39" value="Law" /> Legal systems and policies</label>
+          <label><input type="radio" name="q39" value="Environment" /> Environmental sustainability</label>
+          <label><input type="radio" name="q39" value="Arts" /> Exploring artistic expressions</label>
+        </div>
+        <div class="question">
+          <p>How do you prefer to work?</p>
+          <label><input type="radio" name="q40" value="Business" /> Leading and managing people</label>
+          <label><input type="radio" name="q40" value="Technology" /> Independently solving problems</label>
+          <label><input type="radio" name="q40" value="Arts" /> Collaborating creatively</label>
+          <label><input type="radio" name="q40" value="Law" /> Analyzing laws and policies</label>
+        </div>
+        <div class="question">
+          <p>What do you value most?</p>
+          <label><input type="radio" name="q41" value="Environment" /> Sustainable development</label>
+          <label><input type="radio" name="q41" value="Technology" /> Technological advancement</label>
+          <label><input type="radio" name="q41" value="Business" /> Organizational growth</label>
+          <label><input type="radio" name="q41" value="Law" /> Justice and fairness</label>
+        </div>
+        <!-- Add 25 more questions for Part 2 -->
+      </div>
+
+      <!-- Submit Button for Part 1 -->
+      <button id="submit-part1" class="submit-button">Submit Part 1</button>
+
+      <!-- Submit Button for Part 2 (Hidden Initially) -->
+      <button id="submit-part2" class="submit-button hidden">Submit Part 2</button>
+
+      <!-- Result Section (Hidden Initially) -->
+      <div id="result-section" class="hidden">
+        <h2>Your Aptitude Result</h2>
+        <div class="result" id="result"></div>
+      </div>
+    </div>
+
+    <script>
+      // Variables to store scores for each course
+      const scores = {
+        Business: 0,
+        Technology: 0,
+        Healthcare: 0,
+        Arts: 0,
+        Law: 0,
+        Entrepreneurship: 0,
+        Environment: 0,
+      };
+
+      // Function to calculate scores
+      function calculateScores() {
+        const questions = document.querySelectorAll(".question");
+        questions.forEach((question) => {
+          const selectedOption = question.querySelector("input[type='radio']:checked");
+          if (selectedOption) {
+            scores[selectedOption.value]++;
+          }
+        });
+      }
+
+      // Function to display result
+      function displayResult() {
+        const resultDiv = document.getElementById("result");
+        let resultText = "Your aptitude lies in:<br>";
+        for (const [course, score] of Object.entries(scores)) {
+          resultText += `${course}: ${score}<br>`;
+        }
+        resultDiv.innerHTML = resultText;
+      }
+
+      // Event Listeners
+      document.getElementById("submit-part1").addEventListener("click", () => {
+        calculateScores();
+        document.getElementById("part1").classList.add("hidden");
+        document.getElementById("part2").classList.remove("hidden");
+        document.getElementById("submit-part1").classList.add("hidden");
+        document.getElementById("submit-part2").classList.remove("hidden");
+      });
+
+      document.getElementById("submit-part2").addEventListener("click", () => {
+        calculateScores();
+        document.getElementById("part2").classList.add("hidden");
+        document.getElementById("result-section").classList.remove("hidden");
+        displayResult();
+      });
+    </script>
+  </body>
+</html>

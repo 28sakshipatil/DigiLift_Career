@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counselor Dashboard | DigiLift Careers</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #bae8e8; /* Light grey background */
+        color: #333;
+      }
+
+      /* Top Navigation Bar */
+      .navbar {
+        background-color: #ffffff; /* White background */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333; /* Black text */
+      }
+
+      .navbar ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .navbar ul li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+      }
+
+      .navbar ul li a:hover {
+        background-color: #f0f0f0; /* Light grey on hover */
+      }
+
+      .navbar ul li a i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+      }
+
+      .navbar .signout-btn {
+        background-color: #333; /* Black button */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .navbar .signout-btn:hover {
+        background-color: #555; /* Darker grey on hover */
+        transform: translateY(-3px);
+      }
+
+      /* Main Content */
+      .main-content {
+        padding: 100px 40px 40px; /* Adjusted for fixed navbar */
+        background-color: #ffffff; /* White background */
+      }
+
+      .main-content h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333; /* Black text */
+        margin-bottom: 20px;
+      }
+
+      /* Cards */
+      .card {
+        background-color: #ffffff; /* White background */
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: left; /* Align text to the left */
+      }
+
+      .card h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333; /* Black text */
+        margin-bottom: 15px;
+      }
+
+      .card p {
+        font-size: 1rem;
+        color: #555; /* Dark grey text */
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .card .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333; /* Black button */
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .card .btn:hover {
+        background-color: #555; /* Darker grey on hover */
+        transform: translateY(-3px);
+      }
+
+      .card .btn:disabled {
+        background-color: #ccc; /* Grey for disabled buttons */
+        cursor: not-allowed;
+      }
+
+      /* Tables for Counselor */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      table th,
+      table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      table th {
+        background-color: #f9f9f9; /* Light grey background */
+        font-weight: 600;
+      }
+
+      table tr:hover {
+        background-color: #f0f0f0; /* Light grey on hover */
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navbar ul {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .navbar .signout-btn {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <div class="navbar">
+      <h2>Counselor Dashboard</h2>
+      <ul>
+        <li><a href="#counseling-requests" onclick="showSection('counseling-requests')">📩 Requests</a></li>
+        <li><a href="#view-schedule" onclick="showSection('view-schedule')">📅 View Schedule</a></li>
+        <li><a href="#manage-sessions" onclick="showSection('manage-sessions')">🛠 Manage Sessions</a></li>
+        <!-- <li><a href="#student-interactions" onclick="showSection('student-interactions')">💬 Student Chats</a></li> -->
+      </ul>
+      <button class="signout-btn" onclick="signOut()">Sign Out</button>
+    </div>
+
+    <!-- Main Content -->
+<!-- Counselor Dashboard -->
+<div class="main-content">
+  <!-- Requests Section -->
+  <div id="counseling-requests" class="card">
+    <h3>Student Counseling Requests</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="requestsTable"></tbody>
+    </table>
+  </div>
+
+  <!-- View Schedule Section -->
+  <div id="view-schedule" class="card">
+    <h3>View Schedule</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Meeting Details</th>
+        </tr>
+      </thead>
+      <tbody id="scheduleTable"></tbody>
+    </table>
+  </div>
+
+  <!-- Manage Sessions Section -->
+  <div id="manage-sessions" class="card" style="display: none">
+    <h3>Manage Sessions</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Meeting Details</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="sessionsTable"></tbody>
+    </table>
+  </div>
+
+  <!-- Student Interactions Section -->
+  <div id="student-interactions" class="card" style="display: none">
+    <h3>Student Interactions</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Message</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="interactionsTable"></tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  function showSection(sectionId) {
+    document.querySelectorAll(".card").forEach((section) => {
+      section.style.display = "none";
+    });
+
+    const sectionToShow = document.getElementById(sectionId);
+    if (sectionToShow) {
+      sectionToShow.style.display = "block";
+    } else {
+      console.error(`Section with ID "${sectionId}" not found.`);
+    }
+  }
+</script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+      const counselorId = localStorage.getItem("counselorId");
+      console.log("Counselor ID after redirection:", counselorId); // Debugging
+
+      if (!counselorId) {
+        alert("Session Expired! Please log in again.");
+        window.location.href = "./../roleselection.html";  
+        return;  // Stop execution if no session
+      }
+      document.querySelectorAll(".card").forEach((section) => {
+      section.style.display = "none";
+    });
+    document.getElementById("counseling-requests").style.display = "block";
+      fetchCounselingRequests(counselorId);  // Fetch data only if counselorId exists
+    }, 2000);  // Wait 2 seconds before checking
+  });
+
+  /** =============================== **/
+  /** 🟢 Fetch Counseling Requests 🟢 **/
+  /** =============================== **/
+  function fetchCounselingRequests(counselorId) {  
+    fetch(`http://localhost:4000/counselor-requests/${counselorId}`)
+      .then((res) => res.json())
+      .then((requests) => {
+        const tableBody = document.getElementById("requestsTable");
+        tableBody.innerHTML = "";
+
+        if (!requests.length) {
+          tableBody.innerHTML = `<tr><td colspan="3">No counseling requests found.</td></tr>`;
+          return;
+        }
+
+        requests.forEach((req) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${req.studentId.name}</td>
+            <td>${req.status}</td>
+            <td>
+              ${req.status === "Pending"
+                ? `
+                <button class="btn accept-btn" data-request-id="${req._id}">Accept</button>
+                <button class="btn decline-btn" data-request-id="${req._id}">Decline</button>
+              `
+                : req.status === "Accepted"
+                ? `<span style="color: green;">Accepted</span>`
+                : `<span style="color: red;">Declined</span>`}
+            </td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+
+        // Attach event listeners dynamically AFTER elements are added
+        attachRequestEventListeners();
+      })
+      .catch((err) => console.error("Error fetching requests:", err));
+  }
+
+  /** ===================================== **/
+  /** ✅ Attach Event Listeners for Buttons **/
+  /** ===================================== **/
+  function attachRequestEventListeners() {
+    document.querySelectorAll(".accept-btn").forEach(button => {
+      button.addEventListener("click", function() {
+        const requestId = this.getAttribute("data-request-id");
+        updateRequest(requestId, "Accepted");
+      });
+    });
+
+    document.querySelectorAll(".decline-btn").forEach(button => {
+      button.addEventListener("click", function() {
+        const requestId = this.getAttribute("data-request-id");
+        updateRequest(requestId, "Declined");
+      });
+    });
+  }
+
+  /** ============================ **/
+  /** 🔄 Update Request Status API **/
+  async function updateRequest(requestId, response) {
+  let meetingDetails = null;
+  let date = null;
+  let time = null;
+
+  if (response === "Accepted") {
+    // Create a modal dialog for meeting details, date, and time selection
+    const modal = document.createElement("div");
+    modal.innerHTML = `
+      <div id="session-modal" style="
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        background: white; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 5px; z-index: 1000; text-align: center;
+      ">
+        <h3>Enter Meeting Details</h3>
+        
+        <label for="meeting-details">Meeting Details (Optional):</label><br>
+        <input type="text" id="meeting-details" placeholder="Enter details (optional)" style="width: 90%; padding: 5px; margin: 5px 0;"><br>
+
+        <button id="generate-meet-link" style="background: blue; color: white; padding: 8px 15px; border: none; cursor: pointer;">
+          Schedule in Google Meet
+        </button><br><br>
+
+        <label for="session-date">Select Session Date:</label><br>
+        <input type="date" id="session-date" required style="width: 90%; padding: 5px; margin: 5px 0;"><br>
+
+        <label for="session-time">Select Session Time:</label><br>
+        <select id="session-time" style="width: 90%; padding: 5px; margin: 5px 0;">
+          ${generateTimeOptions()}
+        </select><br><br>
+
+        <button id="confirm-session" style="background: green; color: white; padding: 8px 15px; border: none; cursor: pointer;">Confirm</button>
+        <button id="cancel-session" style="background: red; color: white; padding: 8px 15px; border: none; cursor: pointer;">Cancel</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Event listener for Google Meet button
+    document.getElementById("generate-meet-link").addEventListener("click", () => {
+      const meetURL = "https://meet.google.com/new";
+      window.open(meetURL, "_blank"); // Open in a new tab
+
+      // Wait for a short delay, then insert the Meet link
+      setTimeout(() => {
+        document.getElementById("meeting-details").value = meetURL;
+      }, 500); // Delay to ensure user sees new tab first
+    });
+
+    return new Promise((resolve) => {
+      document.getElementById("confirm-session").addEventListener("click", async () => {
+        meetingDetails = document.getElementById("meeting-details").value;
+        date = document.getElementById("session-date").value;
+        time = document.getElementById("session-time").value;
+
+        if (!date || !time) {
+          alert("Please select both date and time.");
+          return;
+        }
+
+        document.body.removeChild(modal);
+        resolve(sendRequest(requestId, response, meetingDetails, date, time));
+      });
+
+      document.getElementById("cancel-session").addEventListener("click", () => {
+        document.body.removeChild(modal);
+        resolve();
+      });
+    });
+  } else {
+    return sendRequest(requestId, response, meetingDetails, date, time);
+  }
+}
+
+// Function to send API request
+async function sendRequest(requestId, response, meetingDetails, date, time) {
+  try {
+    const res = await fetch("http://localhost:4000/counselor-response", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ requestId, response, meetingDetails, date, time })
+    });
+
+    const data = await res.json();
+    alert(data.message);
+
+    // Reload the table after updating status
+    fetchCounselingRequests(localStorage.getItem("counselorId"));
+  } catch (error) {
+    console.error("Error updating request:", error);
+    alert("Failed to update request.");
+  }
+}
+
+// Function to generate 30-minute time slots
+function generateTimeOptions() {
+  const times = [];
+  const startHour = 9; // Start from 9 AM
+  const endHour = 18; // End at 6 PM
+
+  for (let hour = startHour; hour <= endHour; hour++) {
+    for (let min of ["00", "30"]) {
+      let ampm = hour >= 12 ? "PM" : "AM";
+      let displayHour = hour > 12 ? hour - 12 : hour;
+      times.push(`<option value="${displayHour}:${min} ${ampm}">${displayHour}:${min} ${ampm}</option>`);
+    }
+  }
+
+  return times.join("");
+}
+
+
+
+
+
+
+  
+
+  // /** ======================== **/
+  // /** 🔄 Sign Out Function **/
+  // /** ======================== **/
+  // function signOut() {
+  //   localStorage.removeItem("counselorId"); // Properly remove session
+  //   window.location.href = "../roleselection.html";
+  // }
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const counselorId = localStorage.getItem("counselorId");
+    if (!counselorId) {
+      alert("Session Expired! Please log in again.");
+      window.location.href = "../roleselection.html";
+      return;
+    }
+    fetchUpcomingSessions(counselorId);
+  });
+  
+  /** Fetch Upcoming Sessions **/
+  function fetchUpcomingSessions(counselorId) {
+    fetch(`http://localhost:4000/counselor-sessions/${counselorId}`)
+      .then(res => res.json())
+      .then(sessions => {
+        const scheduleTable = document.getElementById("scheduleTable");
+        const sessionsTable = document.getElementById("sessionsTable");
+  
+        scheduleTable.innerHTML = "";
+        sessionsTable.innerHTML = "";
+  
+        if (!sessions.length) {
+          scheduleTable.innerHTML = `<tr><td colspan="4">No upcoming sessions.</td></tr>`;
+          sessionsTable.innerHTML = `<tr><td colspan="5">No sessions to manage.</td></tr>`;
+          return;
+        }
+  
+        sessions.forEach(session => {
+          scheduleTable.innerHTML += `
+            <tr>
+              <td>${session.studentId.name}</td>
+              <td>${session.date}</td>
+              <td>${session.time}</td>
+              <td>${session.meetingDetails}</td>
+            </tr>
+          `;
+  
+          sessionsTable.innerHTML += `
+            <tr>
+              <td>${session.studentId.name}</td>
+              <td>${session.date}</td>
+              <td>${session.time}</td>
+              <td>${session.meetingDetails}</td>
+              <td>
+                <button class="btn" onclick="modifySession('${session._id}')">Edit</button>
+                <button class="btn" onclick="cancelSession('${session._id}')">Cancel</button>
+              </td>
+            </tr>
+          `;
+        });
+      })
+      .catch(err => console.error("Error fetching sessions:", err));
+  }
+  
+  /** Modify a Session **/
+  function modifySession(sessionId) {
+    const newDate = prompt("Enter new date (YYYY-MM-DD):");
+    const newTime = prompt("Enter new time (HH:MM AM/PM):");
+    const newMeetingDetails = prompt("Enter new meeting details:");
+  
+    if (!newDate || !newTime || !newMeetingDetails) return;
+  
+    fetch(`http://localhost:4000/modify-session/${sessionId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ date: newDate, time: newTime, meetingDetails: newMeetingDetails })
+    }).then(res => res.json()).then(() => fetchUpcomingSessions(localStorage.getItem("counselorId")));
+  }
+  
+  /** Cancel a Session **/
+  function cancelSession(sessionId) {
+    if (!confirm("Are you sure?")) return;
+    fetch(`http://localhost:4000/cancel-session/${sessionId}`, { method: "DELETE" })
+      .then(res => res.json())
+      .then(() => fetchUpcomingSessions(localStorage.getItem("counselorId")));
+  }
+  
+  /** Sign Out **/
+  function signOut() {
+    localStorage.removeItem("counselorId");
+    window.location.href = "../roleselection.html";
+  }
+  </script>
+
+
+     <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+     <script src="https://files.bpcontent.cloud/2025/01/29/16/20250129163329-QCV2OA8X.js"></script>
+  </body>
+</html>

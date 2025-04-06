@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Call | CareerVista</title>
+    <style>
+      /* Global Styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ffffff; /* White background */
+        color: #000000; /* Black text */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Video Call Container */
+      .video-call-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        max-width: 1200px;
+        height: 90vh;
+        background-color: #f5f5f5; /* Light grey background */
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      /* Video Section */
+      .video-section {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        height: 70%;
+        margin-bottom: 20px;
+      }
+
+      .video-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff; /* White background */
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        max-height: 400px;
+        background-color: #e0e0e0; /* Light grey background */
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .video-wrapper p {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #000000; /* Black text */
+      }
+
+      /* Controls */
+      .controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .controls button {
+        padding: 10px 20px;
+        background-color: #000; 
+        color: #e0e0e0; 
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .controls button:hover {
+        background-color: #bdbdbd; /* Medium grey on hover */
+      }
+
+      /* Chat Section */
+      .chat-section {
+        width: 100%;
+        max-width: 300px; /* Smaller width for the chat section */
+        background-color: #ffffff; /* White background */
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .chat-header h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #000000; /* Black text */
+      }
+
+      .chat-messages {
+        height: 50px; /* Smaller height for chat messages */
+        overflow-y: auto;
+        border: 1px solid #e0e0e0; /* Light grey border */
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f5f5f5; /* Light grey background */
+        color: #000000; /* Black text */
+      }
+
+      .chat-input {
+        display: flex;
+        gap: 10px;
+      }
+
+      .chat-input input {
+        flex: 1;
+        padding: 5px; /* Smaller padding */
+        border: 1px solid #e0e0e0; /* Light grey border */
+        border-radius: 4px;
+        font-size: 0.9rem; /* Smaller font size */
+        background-color: #ffffff; /* White background */
+        color: #000000; /* Black text */
+        width: 15cm; /* Set width to 20cm */
+        height: 1cm; /* Set height to 3cm */
+        box-sizing: border-box; /* Ensure padding and border are included in the dimensions */
+      }
+      .chat-input button {
+        padding: 8px 15px; /* Smaller padding */
+        background-color: #000000; /* Light grey background */
+        color: #e0e0e0; /* Black text */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem; /* Smaller font size */
+        transition: background-color 0.3s ease;
+      }
+
+      .chat-input button:hover {
+        background-color: #bdbdbd; /* Medium grey on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-call-container">
+      <!-- Video Section -->
+      <div class="video-section">
+        <div class="video-wrapper">
+          <video muted id="local-video" autoplay></video>
+          <p>You (Student)</p>
+        </div>
+        <div class="video-wrapper">
+          <video id="remote-video" autoplay></video>
+          <p>Counselor</p>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button onclick="muteAudio()" id="mute-button">Mute</button>
+        <button onclick="muteVideo()" id="camera-button">
+          Turn Off Camera
+        </button>
+      </div>
+
+      <!-- Chat Section -->
+      <div class="chat-section">
+        <div class="chat-header">
+          <h2>Enter Room ID:</h2>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <!-- Chat messages will appear here -->
+        </div>
+        <div class="chat-input">
+          <input type="text" id="username-input" placeholder="Enter Room ID: " />
+          <button id="send-button" onclick="joinCall()">Join</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Variables for video and audio streams
+      let localStream;
+      let remoteStream;
+      let peerConnection;
+
+      // Configuration for WebRTC
+      const configuration = {
+        iceServers: [
+          {
+            urls: "stun:stun.l.google.com:19302", // Free STUN server
+          },
+        ],
+      };
+
+      // DOM Elements
+      const localVideo = document.getElementById("local-video");
+      const remoteVideo = document.getElementById("remote-video");
+      const chatMessages = document.getElementById("chat-messages");
+      const usernameInput = document.getElementById("username-input");
+      const sendButton = document.getElementById("send-button");
+
+      // Mute Audio
+      function muteAudio() {
+        const audioTracks = localStream.getAudioTracks();
+        const muteButton = document.getElementById("mute-button");
+
+        // Toggle audio track state
+        audioTracks.forEach((track) => {
+          track.enabled = !track.enabled;
+        });
+
+        // Update button text based on audio state
+        if (audioTracks[0].enabled) {
+          muteButton.textContent = "Mute";
+        } else {
+          muteButton.textContent = "Unmute";
+        }
+      }
+
+      // Mute Video
+      function muteVideo() {
+        const videoTracks = localStream.getVideoTracks();
+        const cameraButton = document.getElementById("camera-button");
+
+        // Toggle video track state
+        videoTracks.forEach((track) => {
+          track.enabled = !track.enabled;
+        });
+
+        // Update button text based on video state
+        if (videoTracks[0].enabled) {
+          cameraButton.textContent = "Turn Off Camera";
+        } else {
+          cameraButton.textContent = "Turn On Camera";
+        }
+      }
+
+      // Join Call
+      function joinCall() {
+        const roomId = usernameInput.value;
+        if (!roomId) {
+          alert("Please enter a Room ID.");
+          return;
+        }
+
+        // Initialize WebRTC connection
+        initWebRTC(roomId);
+      }
+
+      // Initialize WebRTC
+      async function initWebRTC(roomId) {
+        try {
+          // Get local media stream (video and audio)
+          localStream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true,
+          });
+          localVideo.srcObject = localStream;
+
+          // Create a peer connection
+          peerConnection = new RTCPeerConnection(configuration);
+
+          // Add local stream tracks to the peer connection
+          localStream.getTracks().forEach((track) => {
+            peerConnection.addTrack(track, localStream);
+          });
+
+          // Handle remote stream
+          peerConnection.ontrack = (event) => {
+            remoteStream = event.streams[0];
+            remoteVideo.srcObject = remoteStream;
+          };
+
+          // Handle ICE candidates
+          peerConnection.onicecandidate = (event) => {
+            if (event.candidate) {
+              // Send the ICE candidate to the other peer (counselor)
+              // You can use a signaling server or WebSocket for this
+            }
+          };
+
+          // Join the room (simulate signaling)
+          console.log(`Joined room: ${roomId}`);
+        } catch (error) {
+          console.error("Error initializing WebRTC:", error);
+        }
+      }
+    </script>
+  </body>
+</html>
