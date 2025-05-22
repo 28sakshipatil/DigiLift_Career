@@ -49,3 +49,7 @@
 - python app.py
 
 #### open about_us.html file in web 
+## Contributors
+
+- [Bianca Noronha](https://github.com/bianca2501)  
+- [Lincia Mandvighar](https://github.com/Lincia19)
