@@ -51,6 +51,8 @@
 #### open about_us.html file in web 
 ## Contributors
 
+
+- [Sakshi Patil](https://github.com/28sakshipatil)
 - [Bianca Noronha](https://github.com/bianca2501)  
 - [Lincia Mandvighar](https://github.com/Lincia19)
 - [Mokshada Marathe](https://github.com/Mokshadaaa)
